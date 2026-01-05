@@ -22,12 +22,12 @@ def save_accounts(accounts):
 def register(accounts):
     username = input("Enter a new username: ")
     if username in accounts:
-        print("⚠️ Username already exists.")
+        print(" Username already exists.")
         return None
     password = input("Enter a password: ")
     accounts[username] = {"password": password, "balance": 0.0}
     save_accounts(accounts)
-    print("✅ Registration successful. Please login.")
+    print(" Registration successful. Please login.")
     return None
 
 # Authenticate a user
@@ -35,10 +35,10 @@ def login(accounts):
     username = input("Username: ")
     password = input("Password: ")
     if username in accounts and accounts[username]["password"] == password:
-        print(f"✅ Welcome, {username}!")
+        print(f" Welcome, {username}!")
         return username
     else:
-        print("❌ Incorrect username or password.")
+        print(" Incorrect username or password.")
         return None
 
 # Deposit
@@ -47,11 +47,11 @@ def deposit(accounts, username):
         amount = float(input("Enter amount to deposit: "))
         if amount > 0:
             accounts[username]["balance"] += amount
-            print(f"✅ Deposited ${amount:.2f}")
+            print(f" Deposited ${amount:.2f}")
         else:
-            print("⚠️ Invalid amount.")
+            print(" Invalid amount.")
     except ValueError:
-        print("⚠️ Please enter a valid number.")
+        print(" Please enter a valid number.")
     save_accounts(accounts)
 
 # Withdraw
@@ -60,22 +60,22 @@ def withdraw(accounts, username):
         amount = float(input("Enter amount to withdraw: "))
         if 0 < amount <= accounts[username]["balance"]:
             accounts[username]["balance"] -= amount
-            print(f"✅ Withdrawn ${amount:.2f}")
+            print(f" Withdrawn ${amount:.2f}")
         else:
-            print("⚠️ Insufficient funds or invalid amount.")
+            print(" Insufficient funds or invalid amount.")
     except ValueError:
-        print("⚠️ Please enter a valid number.")
+        print(" Please enter a valid number.")
     save_accounts(accounts)
 
 # Check balance
 def check_balance(accounts, username):
-    print(f"💰 Your balance: ${accounts[username]['balance']:.2f}")
+    print(f" Your balance: ${accounts[username]['balance']:.2f}")
 
 # Transfer money
 def transfer(accounts, username):
     recipient = input("Enter recipient username: ")
     if recipient not in accounts:
-        print("⚠️ Recipient not found.")
+        print(" Recipient not found.")
         return
 
     try:
@@ -83,12 +83,12 @@ def transfer(accounts, username):
         if 0 < amount <= accounts[username]["balance"]:
             accounts[username]["balance"] -= amount
             accounts[recipient]["balance"] += amount
-            print(f"✅ Transferred ${amount:.2f} to {recipient}")
+            print(f" Transferred ${amount:.2f} to {recipient}")
             save_accounts(accounts)
         else:
-            print("⚠️ Insufficient funds or invalid amount.")
+            print(" Insufficient funds or invalid amount.")
     except ValueError:
-        print("⚠️ Invalid amount entered.")
+        print(" Invalid amount entered.")
 
 # Generate monthly bank statement (CSV)
 def generate_statement(accounts, username):
@@ -98,7 +98,7 @@ def generate_statement(accounts, username):
         writer = csv.writer(file)
         writer.writerow(["Username", "Balance", "Date"])
         writer.writerow([username, f"${accounts[username]['balance']:.2f}", now.strftime("%Y-%m-%d %H:%M:%S")])
-    print(f"✅ Statement saved as {filename}")
+    print(f" Statement saved as {filename}")
 
 # Currency Converter
 def currency_converter(accounts, username):
@@ -110,7 +110,7 @@ def currency_converter(accounts, username):
 
         # Check if the base currency data is available
         if base_currency not in data['rates']:
-            print("⚠️ Base currency not supported.")
+            print(" Base currency not supported.")
             return
         
         print("Available currencies:", ", ".join(data['rates'].keys()))
@@ -122,20 +122,20 @@ def currency_converter(accounts, username):
             
             # Check if the user enters a valid amount
             if amount_to_convert <= 0:
-                print("⚠️ Please enter a valid amount greater than 0.")
+                print(" Please enter a valid amount greater than 0.")
                 return
 
             # Perform the conversion
             converted_amount = amount_to_convert * data['rates'][target_currency]
-            print(f"💱 {amount_to_convert:.2f} {base_currency} = {converted_amount:.2f} {target_currency}")
+            print(f" {amount_to_convert:.2f} {base_currency} = {converted_amount:.2f} {target_currency}")
         else:
-            print("⚠️ Currency not found.")
+            print(" Currency not found.")
     except Exception as e:
-        print(f"⚠️ Error fetching currency data: {e}")
+        print(f" Error fetching currency data: {e}")
 
 # Simple Chatbot Assistant
 def chatbot():
-    print("\n🤖 Chatbot: Ask me anything! (type 'exit' to go back)")
+    print("\n Chatbot: Ask me anything! (type 'exit' to go back)")
     faq = {
         "how to deposit": "To deposit, select option 1 from the banking menu.",
         "how to withdraw": "To withdraw, select option 2 from the banking menu.",
@@ -147,7 +147,7 @@ def chatbot():
         question = input("You: ").lower()
         if question == "exit":
             break
-        answer = faq.get(question, "🤖 Sorry, I don't understand that yet.")
+        answer = faq.get(question, " Sorry, I don't understand that yet.")
         print("Chatbot:", answer)
 
 # Main app loop
@@ -194,15 +194,16 @@ def main():
                     elif option == "7":
                         chatbot()
                     elif option == "8":
-                        print("🔒 Logged out.")
+                        print(" Logged out.")
                         break
                     else:
-                        print("⚠️ Invalid choice.")
+                        print(" Invalid choice.")
         elif choice == "3":
-            print("👋 Goodbye!")
+            print(" Goodbye!")
             break
         else:
-            print("⚠️ Invalid option.")
+            print(" Invalid option.")
 
 if __name__ == "__main__":
     main()
+
